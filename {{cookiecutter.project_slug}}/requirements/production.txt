@@ -1,39 +1,21 @@
-# Pro-tip: Try not to put anything here. Avoid dependencies in
-#	production that aren't in development.
--r base.txt
+# PRECAUTION: avoid production dependencies that aren't in development
 
-{% if cookiecutter.windows == 'y' -%}
-# Python-PostgreSQL Database Adapter
-# If using Win for dev, this assumes Unix in prod
-# ------------------------------------------------
-psycopg2==2.7.1
+-r ./base.txt
+
+gunicorn==19.9.0  # https://github.com/benoitc/gunicorn
+psycopg2==2.8 --no-binary psycopg2  # https://github.com/psycopg/psycopg2
+{%- if cookiecutter.use_whitenoise == 'n' %}
+Collectfast==0.6.2  # https://github.com/antonagestam/collectfast
+{%- endif %}
+{%- if cookiecutter.use_sentry == "y" %}
+sentry-sdk==0.8.0  # https://github.com/getsentry/sentry-python
 {%- endif %}
 
-# WSGI Handler
-# ------------------------------------------------
-gevent==1.2.2
-gunicorn==19.7.1
-
-# Static and Media Storage
-# ------------------------------------------------
-boto==2.47.0
-django-storages-redux==1.3.2
-{% if cookiecutter.use_whitenoise != 'y' -%}
-Collectfast==0.5.2
+# Django
+# ------------------------------------------------------------------------------
+{%- if cookiecutter.cloud_provider == 'AWS' %}
+django-storages[boto3]==1.7.1  # https://github.com/jschneier/django-storages
+{%- elif cookiecutter.cloud_provider == 'GCE' %}
+django-storages[google]==1.7.1  # https://github.com/jschneier/django-storages
 {%- endif %}
-
-# Email backends for Mailgun, Postmark, SendGrid and more
-# -------------------------------------------------------
-django-anymail==0.10
-
-{% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
-# Raven is the Sentry client
-# --------------------------
-raven==6.1.0
-{%- endif %}
-
-{% if cookiecutter.use_opbeat == "y" -%}
-# Opbeat agent for performance monitoring
-# -----------------------------------------
-opbeat==3.5.2
-{%- endif %}
+django-anymail[mailgun]==6.0  # https://github.com/anymail/django-anymail

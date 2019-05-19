@@ -1,24 +1,32 @@
 Cookiecutter Django
 =======================
 
-.. image:: https://pyup.io/repos/github/pydanny/cookiecutter-django/shield.svg
-     :target: https://pyup.io/repos/github/pydanny/cookiecutter-django/
-     :alt: Updates
-
 .. image:: https://travis-ci.org/pydanny/cookiecutter-django.svg?branch=master
-     :target: https://travis-ci.org/pydanny/cookiecutter-django?branch=master
-     :alt: Build Status
+    :target: https://travis-ci.org/pydanny/cookiecutter-django?branch=master
+    :alt: Build Status
+
+.. image:: https://pyup.io/repos/github/pydanny/cookiecutter-django/shield.svg
+    :target: https://pyup.io/repos/github/pydanny/cookiecutter-django/
+    :alt: Updates
 
 .. image:: https://badges.gitter.im/Join Chat.svg
-   :target: https://gitter.im/pydanny/cookiecutter-django?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+    :target: https://gitter.im/pydanny/cookiecutter-django?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-Powered by Cookiecutter_, Cookiecutter Django is a framework for jumpstarting production-ready Django projects quickly.
+.. image:: https://www.codetriage.com/pydanny/cookiecutter-django/badges/users.svg
+    :target: https://www.codetriage.com/pydanny/cookiecutter-django
+    :alt: Code Helpers Badge
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/ambv/black
+    :alt: Code style: black
+
+Powered by Cookiecutter_, Cookiecutter Django is a framework for jumpstarting
+production-ready Django projects quickly.
 
 * Documentation: https://cookiecutter-django.readthedocs.io/en/latest/
 * See Troubleshooting_ for common errors and obstacles
-* If you have problems with Cookiecutter Django, please open issues_ before sending emails to the maintainers. You will get a much, MUCH faster response.
-
-.. _cookiecutter: https://github.com/audreyr/cookiecutter
+* If you have problems with Cookiecutter Django, please open issues_ don't send
+  emails to the maintainers.
 
 .. _Troubleshooting: https://cookiecutter-django.readthedocs.io/en/latest/troubleshooting.html
 
@@ -28,24 +36,23 @@ Powered by Cookiecutter_, Cookiecutter Django is a framework for jumpstarting pr
 Features
 ---------
 
-* For Django 1.10
-* Works with Python 3.4.x or 3.5.x. Python 3.6 is experimental
+* For Django 2.1
+* Works with Python 3.6
 * Renders Django projects with 100% starting test coverage
-* Twitter Bootstrap_ v4.0.0 - alpha 6 (`maintained Foundation fork`_ also available)
+* Twitter Bootstrap_ v4 (`maintained Foundation fork`_ also available)
 * 12-Factor_ based settings via django-environ_
 * Secure by default. We believe in SSL.
 * Optimized development and production settings
 * Registration via django-allauth_
 * Comes with custom user model ready to go
-* Grunt build for compass and livereload
+* Optional custom static build using Gulp and livereload
 * Send emails via Anymail_ (using Mailgun_ by default, but switchable)
-* Media storage using Amazon S3
-* Docker support using docker-compose_ for development and production
+* Media storage using Amazon S3 or Google Cloud Storage
+* Docker support using docker-compose_ for development and production (using Traefik_ with LetsEncrypt_ support)
 * Procfile_ for deploying to Heroku
 * Instructions for deploying to PythonAnywhere_
-* Run tests with unittest or py.test
+* Run tests with unittest or pytest
 * Customizable PostgreSQL version
-* Experimental support for Amazon Elastic Beanstalk
 
 .. _`maintained Foundation fork`: https://github.com/Parbhat/cookiecutter-django-foundation
 
@@ -55,11 +62,10 @@ Optional Integrations
 
 *These features can be enabled during initial project setup.*
 
-* Serve static files from Amazon S3 or Whitenoise_
-* Configuration for Celery_
+* Serve static files from Amazon S3, Google Cloud Storage or Whitenoise_
+* Configuration for Celery_ and Flower_ (the latter in Docker setup only)
 * Integration with MailHog_ for local email testing
 * Integration with Sentry_ for error logging
-* Integration with Opbeat_ for performance monitoring
 
 .. _Bootstrap: https://github.com/twbs/bootstrap
 .. _django-environ: https://github.com/joke2k/django-environ
@@ -70,40 +76,43 @@ Optional Integrations
 .. _Mailgun: http://www.mailgun.com/
 .. _Whitenoise: https://whitenoise.readthedocs.io/
 .. _Celery: http://www.celeryproject.org/
+.. _Flower: https://github.com/mher/flower
 .. _Anymail: https://github.com/anymail/django-anymail
 .. _MailHog: https://github.com/mailhog/MailHog
 .. _Sentry: https://sentry.io/welcome/
 .. _docker-compose: https://github.com/docker/compose
-.. _Opbeat: https://opbeat.com/
 .. _PythonAnywhere: https://www.pythonanywhere.com/
-
+.. _Traefik: https://traefik.io/
+.. _LetsEncrypt: https://letsencrypt.org/
 
 Constraints
 -----------
 
 * Only maintained 3rd party libraries are used.
-* Uses PostgreSQL everywhere (9.2+)
-* Environment variables for configuration (This won't work with Apache/mod_wsgi except on AWS ELB).
+* Uses PostgreSQL everywhere (9.4 - 10.5)
+* Environment variables for configuration (This won't work with Apache/mod_wsgi).
 
 Support this Project!
 ----------------------
 
 This project is run by volunteers. Please support them in their efforts to maintain and improve Cookiecutter Django:
 
-* https://www.patreon.com/danielroygreenfeld: Project lead. Expertise in AWS ELB and Django.
+* Daniel Roy Greenfeld, Project Lead (`GitHub <https://github.com/pydanny>`_, `Patreon <https://www.patreon.com/danielroygreenfeld>`_): expertise in Django and AWS ELB.
+
+* Nikita Shupeyko, Core Developer (`GitHub <https://github.com/webyneter>`_): expertise in Python/Django, hands-on DevOps and frontend experience.
 
 Projects that provide financial support to the maintainers:
 
 Two Scoops of Django 1.11
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: https://cdn.shopify.com/s/files/1/0304/6901/files/tsd-111-alpha-470x235.jpg?2934688328290951771
+.. image:: https://cdn.shopify.com/s/files/1/0304/6901/products/tsd-111-alpha_medium.jpg?v=1499531513
    :name: Two Scoops of Django 1.11 Cover
    :align: center
    :alt: Two Scoops of Django
-   :target: http://twoscoopspress.org/products/two-scoops-of-django-1-11
+   :target: http://twoscoopspress.com/products/two-scoops-of-django-1-11
 
-Two Scoops of Django is the best dairy-themed Django reference in the universe
+Two Scoops of Django is the best dessert-themed Django reference in the universe
 
 pyup
 ~~~~~~~~~~~~~~~~~~
@@ -119,7 +128,7 @@ Pyup brings you automated security and dependency updates used by Google and oth
 Usage
 ------
 
-Let's pretend you want to create a Django project called "redditclone". Rather than using `startproject`
+Let's pretend you want to create a Django project called "redditclone". Rather than using ``startproject``
 and then editing the results to include your name, email, and various configuration issues that always get forgotten until the worst possible moment, get cookiecutter_ to do all the work.
 
 First, get Cookiecutter. Trust me, it's awesome::
@@ -146,32 +155,38 @@ Answer the prompts with your own desired options_. For example::
     project_slug [reddit_clone]: reddit
     author_name [Daniel Roy Greenfeld]: Daniel Greenfeld
     email [you@example.com]: pydanny@gmail.com
-    description [A short description of the project.]: A reddit clone.
+    description [Behold My Awesome Project!]: A reddit clone.
     domain_name [example.com]: myreddit.com
     version [0.1.0]: 0.0.1
     timezone [UTC]: America/Los_Angeles
-    use_whitenoise [y]: n
+    use_whitenoise [n]: n
     use_celery [n]: y
     use_mailhog [n]: n
-    use_sentry_for_error_reporting [y]: y
-    use_opbeat [n]: y
+    use_sentry [n]: y
     use_pycharm [n]: y
     windows [n]: n
-    use_docker [y]: n
+    use_docker [n]: n
     use_heroku [n]: y
     use_compressor [n]: y
     Select postgresql_version:
-    1 - 9.5
-    2 - 9.4
-    3 - 9.3
-    4 - 9.2
-    Choose from 1, 2, 3, 4 [1]: 1
+    1 - 10.5
+    2 - 10.4
+    3 - 10.3
+    4 - 10.2
+    5 - 10.1
+    6 - 9.6
+    7 - 9.5
+    8 - 9.4
+    Choose from 1, 2, 3, 4, 5, 6, 7, 8 [1]: 1
     Select js_task_runner:
-    1 - Gulp
-    2 - Grunt
-    3 - None
-    Choose from 1, 2, 3, 4 [1]: 1
-    use_lets_encrypt [n]: n
+    1 - None
+    2 - Gulp
+    Choose from 1, 2 [1]: 1
+    Select cloud_provider:
+    1 - AWS
+    2 - GCS
+    Choose from 1, 2 [1]: 1
+    custom_bootstrap_compilation [n]: n
     Select open_source_license:
     1 - MIT
     2 - BSD
@@ -179,7 +194,8 @@ Answer the prompts with your own desired options_. For example::
     4 - Apache Software License 2.0
     5 - Not open source
     Choose from 1, 2, 3, 4, 5 [1]: 1
-    use_elasticbeanstalk_experimental: n
+    keep_local_envs_in_vcs [y]: y
+    debug[n]: n
 
 Enter the project and take a look around::
 
@@ -216,7 +232,7 @@ Community
 .. _`issue`: https://github.com/pydanny/cookiecutter-django/issues
 .. _`Gitter`: https://gitter.im/pydanny/cookiecutter-django?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-For Readers of Two Scoops of Django 1.8
+For Readers of Two Scoops of Django
 --------------------------------------------
 
 You may notice that some elements of this project do not exactly match what we describe in chapter 3. The reason for that is this project, amongst other things, serves as a test bed for trying out new ideas and concepts. Sometimes they work, sometimes they don't, but the end result is that it won't necessarily match precisely what is described in the book I co-authored.
@@ -268,13 +284,24 @@ experience better.
 Articles
 ---------
 
+* `Using cookiecutter-django with Google Cloud Storage`_ - Mar. 12, 2019
+* `cookiecutter-django with Nginx, Route 53 and ELB`_ - Feb. 12, 2018
+* `cookiecutter-django and Amazon RDS`_ - Feb. 7, 2018
+* `Using Cookiecutter to Jumpstart a Django Project on Windows with PyCharm`_ - May 19, 2017
+* `Exploring with Cookiecutter`_ - Dec. 3, 2016
+* `Introduction to Cookiecutter-Django`_ - Feb. 19, 2016
+* `Django and GitLab - Running Continuous Integration and tests with your FREE account`_ - May. 11, 2016
 * `Development and Deployment of Cookiecutter-Django on Fedora`_ - Jan. 18, 2016
 * `Development and Deployment of Cookiecutter-Django via Docker`_ - Dec. 29, 2015
 * `How to create a Django Application using Cookiecutter and Django 1.8`_ - Sept. 12, 2015
-* `Introduction to Cookiecutter-Django`_ - Feb. 19, 2016
-* `Django and GitLab - Running Continuous Integration and tests with your FREE account`_ - May. 11, 2016
 
 Have a blog or online publication? Write about your cookiecutter-django tips and tricks, then send us a pull request with the link.
+
+.. _`Using cookiecutter-django with Google Cloud Storage`: https://ahhda.github.io/cloud/gce/django/2019/03/12/using-django-cookiecutter-cloud-storage.html
+.. _`cookiecutter-django with Nginx, Route 53 and ELB`: https://msaizar.com/blog/cookiecutter-django-nginx-route-53-and-elb/
+.. _`cookiecutter-django and Amazon RDS`: https://msaizar.com/blog/cookiecutter-django-and-amazon-rds/
+.. _`Exploring with Cookiecutter`: http://www.snowboardingcoder.com/django/2016/12/03/exploring-with-cookiecutter/
+.. _`Using Cookiecutter to Jumpstart a Django Project on Windows with PyCharm`: https://joshuahunter.com/posts/using-cookiecutter-to-jumpstart-a-django-project-on-windows-with-pycharm/
 
 .. _`Development and Deployment of Cookiecutter-Django via Docker`: https://realpython.com/blog/python/development-and-deployment-of-cookiecutter-django-via-docker/
 .. _`Development and Deployment of Cookiecutter-Django on Fedora`: https://realpython.com/blog/python/development-and-deployment-of-cookiecutter-django-on-fedora/

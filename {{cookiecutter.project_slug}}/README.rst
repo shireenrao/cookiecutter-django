@@ -6,6 +6,9 @@
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
      :alt: Built with Cookiecutter Django
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+     :target: https://github.com/ambv/black
+     :alt: Black code style
 {% if cookiecutter.open_source_license != "Not open source" %}
 
 :License: {{cookiecutter.open_source_license}}
@@ -32,12 +35,21 @@ Setting Up Your Users
 
 For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
+Type checks
+^^^^^^^^^^^
+
+Running type checks with mypy:
+
+::
+
+  $ mypy {{cookiecutter.project_slug}}
+
 Test coverage
 ^^^^^^^^^^^^^
 
 To run the tests, check your test coverage, and generate an HTML coverage report::
 
-    $ coverage run manage.py test
+    $ coverage run -m pytest
     $ coverage html
     $ open htmlcov/index.html
 
@@ -46,7 +58,7 @@ Running tests with py.test
 
 ::
 
-  $ py.test
+  $ pytest
 
 Live reloading and Sass CSS compilation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -67,7 +79,7 @@ To run a celery worker:
 .. code-block:: bash
 
     cd {{cookiecutter.project_slug}}
-    celery -A {{cookiecutter.project_slug}}.taskapp worker -l info
+    celery -A config.celery_app worker -l info
 
 Please note: For Celery's import magic to work, it is important *where* the celery commands are run. If you are in the same folder with *manage.py*, you should be right.
 
@@ -79,8 +91,6 @@ Email Server
 {% if cookiecutter.use_docker == 'y' %}
 In development, it is often nice to be able to see emails that are being sent from your application. For that reason local SMTP server `MailHog`_ with a web interface is available as docker container.
 
-.. _mailhog: https://github.com/mailhog/MailHog
-
 Container mailhog will start automatically when you will run all docker containers.
 Please check `cookiecutter-django Docker documentation`_ for more details how to start all containers.
 
@@ -88,21 +98,29 @@ With MailHog running, to view messages that are sent by your application, open y
 {% else %}
 In development, it is often nice to be able to see emails that are being sent from your application. If you choose to use `MailHog`_ when generating the project a local SMTP server with a web interface will be available.
 
+#. `Download the latest MailHog release`_ for your OS.
+
+#. Rename the build to ``MailHog``.
+
+#. Copy the file to the project root.
+
+#. Make it executable: ::
+
+    $ chmod +x MailHog
+
+#. Spin up another terminal window and start it there: ::
+
+    ./MailHog
+
+#. Check out `<http://127.0.0.1:8025/>`_ to see how it goes.
+
+Now you have your own mail server running locally, ready to receive whatever you send it.
+
+.. _`Download the latest MailHog release`: https://github.com/mailhog/MailHog/releases
+{% endif %}
 .. _mailhog: https://github.com/mailhog/MailHog
-
-To start the service, make sure you have nodejs installed, and then type the following::
-
-    $ npm install
-    $ grunt serve
-
-(After the first run you only need to type ``grunt serve``) This will start an email server that listens on ``127.0.0.1:1025`` in addition to starting your Django project and a watch task for live reload.
-
-To view messages that are sent by your application, open your browser and go to ``http://127.0.0.1:8025``
-
-The email server will exit when you exit the Grunt task on the CLI with Ctrl+C.
 {% endif %}
-{% endif %}
-{% if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{% if cookiecutter.use_sentry == "y" %}
 
 Sentry
 ^^^^^^
@@ -135,22 +153,21 @@ See detailed `cookiecutter-django Docker documentation`_.
 
 .. _`cookiecutter-django Docker documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html
 {% endif %}
-{% if cookiecutter.use_elasticbeanstalk_experimental.lower() == 'y' %}
 
-Elastic Beanstalk
-~~~~~~~~~~~~~~~~~~
-
-See detailed `cookiecutter-django Elastic Beanstalk documentation`_.
-
-.. _`cookiecutter-django Docker documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-elastic-beanstalk.html
-
-{% endif %}
 {% if cookiecutter.custom_bootstrap_compilation == "y" %}
 Custom Bootstrap Compilation
 ^^^^^^
 
-To get automatic Bootstrap recompilation with variables of your choice, install bootstrap sass (`bower install bootstrap-sass`) and tweak your variables in `static/sass/custom_bootstrap_vars`.
+The generated CSS is set up with automatic Bootstrap recompilation with variables of your choice.
+Bootstrap v4 is installed using npm and customised by tweaking your variables in ``static/sass/custom_bootstrap_vars``.
 
-(You can find a list of available variables [in the bootstrap-sass source](https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss), or get explanations on them in the [Bootstrap docs](https://getbootstrap.com/customize/).)
+You can find a list of available variables `in the bootstrap source`_, or get explanations on them in the `Bootstrap docs`_.
+
+{% if cookiecutter.js_task_runner == 'Gulp' %}
+Bootstrap's javascript as well as its dependencies is concatenated into a single file: ``static/js/vendors.js``.
+{% endif %}
+
+.. _in the bootstrap source: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
+.. _Bootstrap docs: https://getbootstrap.com/docs/4.1/getting-started/theming/
 
 {% endif %}
