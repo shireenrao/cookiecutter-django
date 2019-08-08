@@ -2,16 +2,17 @@ import os
 import re
 
 import pytest
+from cookiecutter.exceptions import FailedHookException
 from pytest_cases import pytest_fixture_plus
 import sh
 import yaml
 from binaryornot.check import is_binary
 
-PATTERN = "{{(\s?cookiecutter)[.](.*?)}}"
+PATTERN = r"{{(\s?cookiecutter)[.](.*?)}}"
 RE_OBJ = re.compile(PATTERN)
 
 YN_CHOICES = ["y", "n"]
-CLOUD_CHOICES = ["AWS", "GCE"]
+CLOUD_CHOICES = ["AWS", "GCE", "None"]
 
 
 @pytest.fixture
@@ -145,3 +146,14 @@ def test_travis_invokes_pytest(cookies, context):
             assert yaml.load(travis_yml)["script"] == ["pytest"]
         except yaml.YAMLError as e:
             pytest.fail(e)
+
+
+@pytest.mark.parametrize("slug", ["project slug", "Project_Slug"])
+def test_invalid_slug(cookies, context, slug):
+    """Invalid slug should failed pre-generation hook."""
+    context.update({"project_slug": slug})
+
+    result = cookies.bake(extra_context=context)
+
+    assert result.exit_code != 0
+    assert isinstance(result.exception, FailedHookException)
